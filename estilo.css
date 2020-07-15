@@ -1,0 +1,14 @@
+body {
+  background-color: lightblue;
+}
+
+#texto {
+  text-align: center;
+}
+
+.textoImportante {
+  color: black;
+  font-family: fantasy;
+  font-style: italic;
+  font-weight: bold;  
+}
