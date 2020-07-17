@@ -1,44 +1,58 @@
 <html lang="pt">
-  <head>
-    <title>Minha primeira pagina</title>
-    <link rel="stylesheet" href="estilo.css">
-  </head>
+  <html>
+    <head>
+      <title>🌐 REI is the future</title>
+      <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="estilo.css">
+    </head>
   <body>
-    <header>
-      <img src="https://www.portalvgv.com.br/site/wp-content/uploads/2017/01/abrir-uma-imobiliaria-1.png" alt="Ethereum is a crypto currency" />
-      <br>
-      <h1 class="textoImportante">Registro Informal de Imóveis</h1>
+    <header onmouseover="voltaFundo()">
+      <section id="texto">
+        <h1 class="textoImportante">Registro Eletrônico de Imóveis</h1>
+      </section>
+      <br/><br/>
     </header>
-    <section id="texto">
-      <p class="textoImportante">Eu estou adorando aprender sobre programação WEB depois de Blockchain</p>
-     </section>
-     <section>
-       <form name="formImovel" id="formImovel">
-        <fieldset>
-          <legend>Preencha os campos para registrar um imóvel &nbsp;</legend>
-          <div>
-            <label for="paramEndereco">Endereço Ethereum do Proprietário: </label>
-            <br>
-            <input type="text" id="paramEndereco" name="paramEndereco" size="22" maxlength="22" >
-          </div>
-          <div>
-            <label for="paramNomeProprietario">Nome do Proprietário:</label>
-            <br>
-            <input type="text" name="paramNomeProprietario" id="paramNomeProprietario" size="100">
-          </div>
-          <div>
-            <label for="paramValorVenal">Valor Venal: </label>
-            R$ <input type="number" name="paramValorVenal" id="paramValorVenal">
-          </div>
-          <div>
-            <button>💾 Salvar</button>
-          </div>
-        </fieldset>
-       </form>
-     </section>
-    <footer>
+      <section id="texto">
+        <p class="textoImportante">O futuro é agora! </p>
+          <br/><br/><br/><br/><br/>
+          <br/><br/><br/><br/>
+        <p class="textoImportante"style="font-size:115%;"> Faça o seu R.E.I. e esteja por dentro das principais mudanças </p>
+          <br/><br/>
+      </section>
+      <section>
+        <p class="textoImportante">
+          <form name="formImovel" id="formImovel">
+            <fieldset>
+              <legend class="textoImportante"style="font-size:100%">Preencha os campos abaixo para registrar seu imóvel &nbsp;</legend>
+              <br/>
+              <div>
+                <label for="_endereco" class="textoImportante"style="font-size:80%"> Endereço Ethereum do Proprietário: </label>
+                <br>
+                <input type="text" id="_endereco" name="_endereco" size="22" maxlength="22" >
+              </div>
+              <div>
+                <label for="_nomeProprietario" class="textoImportante" style="font-size:80%">Nome do Proprietário:</label>
+                <br>
+                <input type="text" name="_nomeProprietario" id="_nomeProprietario" size="100">
+              </div>
+              <div>
+                <label for="_valorVenal"class="textoImportante" style="font-size:80%">Valor Venal: R$ </label>
+                <input type="number" name="_valorVenal" id="_valorVenal">
+              </div>
+              <div>
+                <button class="textoImportante" style="font-size:70%" onclick="salvarRegistro();">💾 Salvar</button>
+              </div>
+            </fieldset>
+          </form>
+        </p>           
+      </section>
+    <footer onmouseover="easterEgg()">
       <hr>
-      <small class="textoImportante">Aqui vem aquela parte clichê de copyright</small>
+        <small class="textoImportante" style="font-size:60%">👾&nbsp;<i>@nathalydiniz todos os direitos reservados ® </i></small>
     </footer>
-  </body>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" 
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="blockchain.js"></script>
+   </body>
+  </style>
 </html>

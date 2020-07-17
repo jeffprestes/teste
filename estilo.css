@@ -1,18 +1,26 @@
 body {
-  background-color: lightblue;
+  background-color: pink;
+  background-image: url('fundo-teste-site.png');
 }
 
 h1 {
   text-align: center;
+  font-size: 200%;
 }
+
+footer {
+  text-align: center;
+  padding: 1px;
+}    
 
 #texto {
   text-align: center;
 }
 
 .textoImportante {
-  color: black;
-  font-family: fantasy;
-  font-style: italic;
-  font-weight: bold;  
+  color: midnightblue;
+  font-family: 'Press Start 2P', cursive;
 }
+
+
+
