@@ -5,7 +5,7 @@ function voltaFundo() {
 
 function salvarRegistro() {
   event.preventDefault();
-  if ($("#_endereco").val().length != 22) {
+  if ($("#_endereco").val().length != 42) {
     $("#_endereco").focus();
     alert("Endereço inválido");
     return;
