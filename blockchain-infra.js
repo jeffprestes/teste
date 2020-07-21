@@ -3,6 +3,7 @@
 var contaAtual;
 var provedorDeSignatarios;
 var signatario;
+var contratoComSignatario;
 
 /*
 FUNCOES RELACIONADAS A OPERACOES COM METAMASK E CONTRATOS INTELIGENTES NO ETHEREUM
