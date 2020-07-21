@@ -30,7 +30,33 @@ function salvarRegistro() {
     return;
   }
 
-  alert("Tudo certo com os dados do formulário");
+  if (typeof contratoComSignatario === "undefined") {
+    alert("Você não está conectado ao Ethereum. Verifique seu Metamask");
+    return;
+  }
+
+  contratoComSignatario
+    .registraImovel($("#_endereco").val(), $("#_nomeProprietario").val(), $("#_valorVenal").val() * 1)
+    .then((transacao) => {
+      $("#descricaoStatusTransacoes").innerHTML = "Transação enviada. Aguarde pela mineração...";
+      $("#statusTransacoes").toggle();
+      transacao
+        .wait()
+        .then((resultado) => {
+          console.log("registraImovel - o resultado foi ", resultado);
+          $("#descricaoStatusTransacoes").innerHTML = "Transação executada.";
+        })
+        .catch((err) => {
+          console.error("registraImovel - a transação foi minerada e houve um erro. Veja abaixo");
+          console.error(err);
+          $("#descricaoStatusTransacoes").innerHTML = "Algo saiu errado: " + err.message;
+        });
+    })
+    .catch((err) => {
+      console.error("registraImovel - tx só foi enviada");
+      console.error(err);
+      $("#descricaoStatusTransacoes").innerHTML = "Algo saiu errado antes de enviar ao Ethereum: " + err.message;
+    });
 }
 
 function easterEgg() {
