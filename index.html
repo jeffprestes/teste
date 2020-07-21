@@ -1,10 +1,11 @@
 <html lang="pt">
-  <html>
-    <head>
-      <title>🌐 REI is the future</title>
-      <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="estilo.css">
-    </head>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <title>🌐 REI is the future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
+  </head>
   <body>
     <header onmouseover="voltaFundo()">
       <section id="texto">
@@ -19,39 +20,39 @@
       </p>
       <br/><br/>
     </section>
-      <section>
-        <p class="textoImportante">
-          <form name="formImovel" id="formImovel">
-            <fieldset>
-              <legend class="textoImportante"style="font-size:100%">Preencha os campos abaixo para registrar seu imóvel &nbsp;</legend>
-              <br/>
-              <div id="divEndereco">
-                <label for="_endereco" class="textoImportante"style="font-size:80%"> Endereço Ethereum do Proprietário: </label>
-                <br>
-                <input type="text" id="_endereco" name="_endereco" size="22" maxlength="22" >
+    <section>
+      <p class="textoImportante">
+        <form name="formImovel" id="formImovel">
+          <fieldset>
+            <legend class="textoImportante"style="font-size:100%">Preencha os campos abaixo para registrar seu imóvel &nbsp;</legend>
+            <br/>
+            <div id="divEndereco">
+              <label for="_endereco" class="textoImportante"style="font-size:80%"> Endereço Ethereum do Proprietário: </label>
+              <br>
+              <input type="text" id="_endereco" name="_endereco" size="22" maxlength="22" >
+            </div>
+            <div>
+              <label for="_nomeProprietario" class="textoImportante" style="font-size:80%">Nome do Proprietário:</label>
+              <br>
+              <input type="text" name="_nomeProprietario" id="_nomeProprietario" size="100">
+            </div>
+            <div>
+              <label for="_valorVenal" class="textoImportante" style="font-size:80%">Valor Venal: R$ </label>
+              <input type="number" name="_valorVenal" id="_valorVenal">
+            </div>
+            <div>
+              <div>
+                <button id="btnSalvar" class="textoImportante" style="font-size:70%" onclick="salvarRegistro();" disabled>💾 Salvar</button>
               </div>
               <div>
-                <label for="_nomeProprietario" class="textoImportante" style="font-size:80%">Nome do Proprietário:</label>
-                <br>
-                <input type="text" name="_nomeProprietario" id="_nomeProprietario" size="100">
+                <button class="textoImportante" style="font-size:70%" onclick="conectaAoMetamask();">⚡ Conectar ao Metamask </button>
               </div>
-              <div>
-                <label for="_valorVenal" class="textoImportante" style="font-size:80%">Valor Venal: R$ </label>
-                <input type="number" name="_valorVenal" id="_valorVenal">
-              </div>
-              <div>
-                <div>
-                  <button id="btnSalvar" class="textoImportante" style="font-size:70%" onclick="salvarRegistro();" disabled>💾 Salvar</button>
-                </div>
-                <div>
-                  <button class="textoImportante" style="font-size:70%" onclick="conectaAoMetamask();">⚡ Conectar ao Metamask </button>
-                </div>
-              </div>
-            </fieldset>
-          </form>
-        </p>           
-      </section>
-    <footer onmouseover="easterEgg()">
+            </div>
+          </fieldset>
+        </form>
+      </p>           
+    </section>
+    <footer>
       <hr>
         <small class="textoImportante" style="font-size:60%">👾&nbsp;<i>@nathalydiniz todos os direitos reservados ® </i></small>
     </footer>
@@ -59,8 +60,8 @@
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <!-- Importacao da biblioteca Ethers.js para nos auxiliar na comunicacao com o Ethereum -->
     <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+    <script src="dados-contratos-inteligentes.js"></script>
     <script src="blockchain-infra.js"></script>
     <script src="blockchain.js"></script>
    </body>
-  </style>
 </html>

@@ -3,7 +3,6 @@
 var contaAtual;
 var provedorDeSignatarios;
 var signatario;
-var enderecoContratoInteligente;
 
 /*
 FUNCOES RELACIONADAS A OPERACOES COM METAMASK E CONTRATOS INTELIGENTES NO ETHEREUM
@@ -21,7 +20,7 @@ function conectaAoMetamask() {
 
 function requisitaAcessoAContas() {
   ethereum
-    .request("eth_requestAccounts")
+    .send("eth_requestAccounts")
     .then(gerenciaTrocaDeSelecaoDeContas)
     .catch((err) => {
       if (err.code === 4001) {
@@ -35,17 +34,18 @@ function requisitaAcessoAContas() {
 }
 
 function gerenciaTrocaDeSelecaoDeContas(_contas) {
-  console.log("gerenciaTrocaDeSelecaoDeEndereco", _contas.length);
+  var contas = _contas.result;
+  console.log("gerenciaTrocaDeSelecaoDeEndereco", contas.length);
   provedorDeSignatarios = new ethers.providers.Web3Provider(web3.currentProvider);
   signatario = provedorDeSignatarios.getSigner();
-  //contractWithSigner = new ethers.Contract(contractAddress, contractAbi, signer);
-  if (_contas.length === 0) {
+  contratoComSignatario = new ethers.Contract(enderecoContrato, abiContrato, signatario);
+  if (contas.length === 0) {
     alert("Por favor instale o MetaMask em metamask.io");
-  } else if (_contas[0] !== contaAtual) {
-    contaAtual = _contas[0];
+  } else if (contas[0] !== contaAtual) {
+    contaAtual = contas[0];
     if (contaAtual) {
-      console.log("gerenciaTrocaDeSelecaoDeEndereco objects", _contas, contaAtual, signer);
-      $("#btnSalvar").en;
+      console.log("gerenciaTrocaDeSelecaoDeContas objects", contas, contaAtual, signatario, contratoComSignatario);
+      $("#btnSalvar").prop("disabled", false);
     }
   }
 }
