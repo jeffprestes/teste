@@ -21,7 +21,7 @@ function conectaAoMetamask() {
 
 function requisitaAcessoAContas() {
   ethereum
-    .send("eth_requestAccounts")
+    .request("eth_requestAccounts")
     .then(gerenciaTrocaDeSelecaoDeContas)
     .catch((err) => {
       if (err.code === 4001) {
