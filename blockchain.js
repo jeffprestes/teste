@@ -38,24 +38,24 @@ function salvarRegistro() {
   contratoComSignatario
     .registraImovel($("#_endereco").val(), $("#_nomeProprietario").val(), $("#_valorVenal").val() * 1)
     .then((transacao) => {
-      $("#descricaoStatusTransacoes").innerHTML = "Transação enviada. Aguarde pela mineração...";
+      $("#descricaoStatusTransacoes").html("Transação enviada. Aguarde pela mineração...");
       $("#statusTransacoes").toggle();
       transacao
         .wait()
         .then((resultado) => {
           console.log("registraImovel - o resultado foi ", resultado);
-          $("#descricaoStatusTransacoes").innerHTML = "Transação executada.";
+          $("#descricaoStatusTransacoes").html("Transação executada.");
         })
         .catch((err) => {
           console.error("registraImovel - a transação foi minerada e houve um erro. Veja abaixo");
           console.error(err);
-          $("#descricaoStatusTransacoes").innerHTML = "Algo saiu errado: " + err.message;
+          $("#descricaoStatusTransacoes").html("Algo saiu errado: " + err.message);
         });
     })
     .catch((err) => {
       console.error("registraImovel - tx só foi enviada");
       console.error(err);
-      $("#descricaoStatusTransacoes").innerHTML = "Algo saiu errado antes de enviar ao Ethereum: " + err.message;
+      $("#descricaoStatusTransacoes").html("Algo saiu errado antes de enviar ao Ethereum: " + err.message);
     });
 }
 
