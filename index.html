@@ -40,7 +40,12 @@
                 <input type="number" name="_valorVenal" id="_valorVenal">
               </div>
               <div>
-                <button class="textoImportante" style="font-size:70%" onclick="salvarRegistro();">💾 Salvar</button>
+                <div>
+                  <button class="textoImportante" style="font-size:70%" onclick="salvarRegistro();" disabled>💾 Salvar</button>
+                </div>
+                <div>
+                  <button class="textoImportante" style="font-size:70%" onclick="conectaAoMetamask();">⚡ Conectar ao Metamask </button>
+                </div>
               </div>
             </fieldset>
           </form>
@@ -52,7 +57,16 @@
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.js" 
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <!-- Importacao da biblioteca Ethers.js para nos auxiliar na comunicacao com o Ethereum -->
+    <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
+    <script src="blockchain-infra.js"></script>
     <script src="blockchain.js"></script>
+    <script>
+      //Definicoes de variaveis para toda a pagina (ou site)
+      var contaAtual;
+      var provedorDeSignatarios;
+      var signatario;
+    </script>
    </body>
   </style>
 </html>
