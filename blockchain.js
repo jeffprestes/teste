@@ -44,7 +44,11 @@ function salvarRegistro() {
         .wait()
         .then((resultado) => {
           console.log("registraImovel - o resultado foi ", resultado);
-          $("#descricaoStatusTransacoes").html("Transação executada.");
+          if (resultado.status === 1) {
+            $("#descricaoStatusTransacoes").html("Transação executada.");
+          } else {
+            $("#descricaoStatusTransacoes").html("Houve um erro na execução da transação no Ethereum.");
+          }
         })
         .catch((err) => {
           console.error("registraImovel - a transação foi minerada e houve um erro. Veja abaixo");

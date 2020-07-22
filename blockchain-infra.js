@@ -37,12 +37,14 @@ function requisitaAcessoAContas() {
 function gerenciaTrocaDeSelecaoDeContas(_contas) {
   var contas = _contas.result;
   console.log("gerenciaTrocaDeSelecaoDeEndereco", contas.length);
+  if (contas.length === 0) {
+    alert("Por favor instale o MetaMask em metamask.io");
+    return;
+  }
   provedorDeSignatarios = new ethers.providers.Web3Provider(web3.currentProvider);
   signatario = provedorDeSignatarios.getSigner();
   contratoComSignatario = new ethers.Contract(enderecoContrato, abiContrato, signatario);
-  if (contas.length === 0) {
-    alert("Por favor instale o MetaMask em metamask.io");
-  } else if (contas[0] !== contaAtual) {
+  if (contas[0] !== contaAtual) {
     contaAtual = contas[0];
     if (contaAtual) {
       console.log("gerenciaTrocaDeSelecaoDeContas objects", contas, contaAtual, signatario, contratoComSignatario);
@@ -50,5 +52,3 @@ function gerenciaTrocaDeSelecaoDeContas(_contas) {
     }
   }
 }
-
-var abiContratoInteligente;
