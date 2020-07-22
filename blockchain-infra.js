@@ -35,20 +35,26 @@ function requisitaAcessoAContas() {
 }
 
 function gerenciaTrocaDeSelecaoDeContas(_contas) {
-  var contas = _contas.result;
-  console.log("gerenciaTrocaDeSelecaoDeEndereco", contas.length);
+  if (typeof provedorDeSignatarios === "undefined") {
+    provedorDeSignatarios = new ethers.providers.Web3Provider(web3.currentProvider);
+  }
+  var contas;
+  if (typeof _contas.result === "undefined") {
+    contas = _contas;
+  } else {
+    contas = _contas.result;
+  }
+  console.log("gerenciaTrocaDeSelecaoDeEndereco - parametro recebido", contas);
   if (contas.length === 0) {
-    alert("Por favor instale o MetaMask em metamask.io");
+    alert("Por favor instale o MetaMask em metamask.io ou o autorize a acessar a sua conta");
     return;
   }
-  provedorDeSignatarios = new ethers.providers.Web3Provider(web3.currentProvider);
-  signatario = provedorDeSignatarios.getSigner();
-  contratoComSignatario = new ethers.Contract(enderecoContrato, abiContrato, signatario);
   if (contas[0] !== contaAtual) {
     contaAtual = contas[0];
     if (contaAtual) {
-      console.log("gerenciaTrocaDeSelecaoDeContas objects", contas, contaAtual, signatario, contratoComSignatario);
       $("#btnSalvar").prop("disabled", false);
     }
   }
+  signatario = provedorDeSignatarios.getSigner();
+  contratoComSignatario = new ethers.Contract(enderecoContrato, abiContrato, signatario);
 }
