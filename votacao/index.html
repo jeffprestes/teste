@@ -13,12 +13,9 @@
       <h1>
         Plebiscito
       </h1>
-      <div>
-        <button id="btnConectaMetamask" onclick="conectaAoMetamask()">Para participar conecte-se ao 🦊 Metamask</button>
-      </div>
-      <h2 id="tituloPlebiscito" style="display: none;">
+      <h3 id="tituloPlebiscito" style="display: none;">
         A materia deste Plebiscito é: &nbsp; <span id="materiaDeVotacao"></span>
-      </h2>
+      </h3>
     </header>
     <section id="informacoes" style="display: none;">
       <div>
@@ -39,13 +36,18 @@
       </div>
     </section>
     <section id="votacao" style="display: none;">
-      <div>
-        <h2>Vote na opção desejada</h2>
+      <div id="botaoConexao">
+        <button id="btnConectaMetamask" onclick="conectaAoMetamask()">Para participar conecte-se ao 🦊 Metamask</button>
       </div>
-      <div>
-        <button id="btnOpcao1" onclick="enviaVoto(1)" disabled>XXXX</button>
-        &nbsp;&nbsp;
-        <button id="btnOpcao2" onclick="enviaVoto(2)" disabled>XXXX</button>
+      <div id="areaOpcoesVotacao" style="display: none;">
+        <div>
+          <h2 id="descricaoAptidaoVotacao">&nbsp;</h2>
+        </div>
+        <div>
+          <button id="btnOpcao1" onclick="enviaVoto(1)" disabled>XXXX</button>
+          &nbsp;&nbsp;
+          <button id="btnOpcao2" onclick="enviaVoto(2)" disabled>XXXX</button>
+        </div>
       </div>
     </section>
 
@@ -61,5 +63,14 @@
   <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js" type="text/javascript"></script>
   <script src="dados-contratos-inteligentes.js"></script>
   <script src="blockchain-infra.js"></script>
+  <script>
+    /*
+    Funcao padrao do jQuery para quando voce quer que um script seja inicializado 
+    apos os elementos da pagina serem devidamente carregados
+    */
+    $( document ).ready(function() {
+      inicio();
+    });
+  </script>
 </body>
 </html>

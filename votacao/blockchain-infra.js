@@ -1,13 +1,33 @@
 //Definicoes de variaveis para toda a pagina (ou site)
 //Variaveis essas relacionadas a operações com Metamask e Contratos Inteligentes no Ethereum
 var contaAtual;
+var provedor;
 var provedorDeSignatarios;
 var signatario;
 var contratoComSignatario;
+var contratoSemSignatario;
 
 /*
 FUNCOES RELACIONADAS A OPERACOES COM METAMASK E CONTRATOS INTELIGENTES NO ETHEREUM
 */
+
+//Funcao a ser chamada quando a pagina for carregada e estiver pronta (document ready)
+function inicio() {
+  /* 
+  Caso queira somente ler dados do Ethereum via Javascript não precisa se conectar 
+  via Metamask. Pode usar um provedor padrão fornecido pelo ethers.js
+  */
+  provedor = ethers.getDefaultProvider("rinkeby");
+  /*
+  Depois se conecte ao contrato passando como parametro esse provedor.
+  Veja que chamamos de contratoSemSignatario pois como não conectamos ao Metamask
+  esse provedor não tem uma chave privada para assinar uma transação para enviar 
+  ao blockchain Ethereum.
+  */
+  contratoSemSignatario = new ethers.Contract(enderecoContrato, abiContrato, provedor);
+  buscarDadosDoContratoInteligente(contratoSemSignatario);
+}
+
 function conectaAoMetamask() {
   event.preventDefault();
   console.log("conectaAoMetamask chamado");
@@ -51,18 +71,20 @@ function gerenciaTrocaDeSelecaoDeContas(_contas) {
   }
   if (contas[0] !== contaAtual) {
     contaAtual = contas[0];
-    if (contaAtual) {
-      $("#btnOpcao1").prop("disabled", false);
-      $("#btnOpcao2").prop("disabled", false);
-    }
   }
   signatario = provedorDeSignatarios.getSigner();
   contratoComSignatario = new ethers.Contract(enderecoContrato, abiContrato, signatario);
-  buscarDadosDoContratoInteligente();
+  //buscarDadosDoContratoInteligente(contratoComSignatario);
+  $("#btnConectaMetamask").hide();
+  $("#areaOpcoesVotacao").show();
+  estaAptoAVotar(contaAtual, contratoComSignatario);
 }
 
-function buscarDadosDoContratoInteligente() {
-  contratoComSignatario
+function buscarDadosDoContratoInteligente(_contrato) {
+  if (typeof _contrato === "undefined") {
+    _contrato = contratoSemSignatario;
+  }
+  _contrato
     .materia()
     .then((resultado) => {
       console.log("O conteudo retornado foi ", resultado);
@@ -71,7 +93,7 @@ function buscarDadosDoContratoInteligente() {
     .catch((err) => {
       console.error("Houve um erro ", err);
     });
-  contratoComSignatario
+  _contrato
     .opcao1()
     .then((resultado) => {
       console.log("O conteudo retornado foi ", resultado);
@@ -81,7 +103,7 @@ function buscarDadosDoContratoInteligente() {
     .catch((err) => {
       console.error("Houve um erro ", err);
     });
-  contratoComSignatario
+  _contrato
     .votosOpcao1()
     .then((resultado) => {
       console.log("O conteudo retornado foi ", resultado.toNumber());
@@ -90,7 +112,7 @@ function buscarDadosDoContratoInteligente() {
     .catch((err) => {
       console.error("Houve um erro ", err);
     });
-  contratoComSignatario
+  _contrato
     .opcao2()
     .then((resultado) => {
       console.log("O conteudo retornado foi ", resultado);
@@ -100,7 +122,7 @@ function buscarDadosDoContratoInteligente() {
     .catch((err) => {
       console.error("Houve um erro ", err);
     });
-  contratoComSignatario
+  _contrato
     .votosOpcao2()
     .then((resultado) => {
       console.log("O conteudo retornado foi ", resultado.toNumber());
@@ -112,7 +134,34 @@ function buscarDadosDoContratoInteligente() {
   $("#informacoes").show();
   $("#votacao").show();
   $("#tituloPlebiscito").show();
-  $("#btnConectaMetamask").hide();
+}
+
+function estaAptoAVotar(_address, _contrato) {
+  _contrato
+    .eleitores(_address)
+    .then((resultado) => {
+      console.log("O conteudo retornado foi ", resultado);
+      //lembre-se que (resultado) é igual a (resultado == true)
+      if (resultado) {
+        $("#descricaoAptidaoVotacao").html("Escolha a opção em que deseja votar.");
+        $("#btnOpcao1").prop("disabled", false);
+        $("#btnOpcao2").prop("disabled", false);
+      } else {
+        //Busca o endereco do secretario para informar o eleitor
+        _contrato
+          .secretario()
+          .then((resultado) => {
+            console.log("O conteudo retornado foi ", resultado);
+            $("#descricaoAptidaoVotacao").html("Você não esta apto a votar. Converse com o secretário. O endereço Ethereum do mesmo é: " + resultado);
+          })
+          .catch((err) => {
+            console.error("Houve um erro ", err);
+          });
+      }
+    })
+    .catch((err) => {
+      console.error("Houve um erro ", err);
+    });
 }
 
 function enviaVoto(_opcaoDesejada) {
